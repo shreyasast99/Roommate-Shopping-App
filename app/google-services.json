@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:809629065040:android:7dca493708547bbdf0d655",
         "android_client_info": {
-          "package_name": "edu.cs.uga.roommateshoppingapp"
+          "package_name": "edu.uga.cs.roommateshoppingapp"
         }
       },
       "oauth_client": [
