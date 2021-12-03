@@ -53,7 +53,7 @@ public class tobuyActivity
         floatingButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new AddJobLeadDialogFragment();
+                DialogFragment newFragment = new AddItemDialogFragment();
                 showDialogFragment(newFragment);
             }
         });
@@ -87,8 +87,8 @@ public class tobuyActivity
                 }
                 Log.d( DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): setting recyclerAdapter" );
 
-                // Now, create a JobLeadRecyclerAdapter to populate a ReceyclerView to display the job leads.
-                recyclerAdapter = new JobLeadRecyclerAdapter( itemList );
+                // Now, create a itemRecyclerAdapterr to populate a ReceyclerView to display the job leads.
+                recyclerAdapter = new itemRecyclerAdapter( itemList );
                 recyclerView.setAdapter( recyclerAdapter );
             }
 
