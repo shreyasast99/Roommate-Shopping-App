@@ -40,17 +40,17 @@ public class tobuyActivity
     private List<Item> itemList;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState ) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-        Log.d( DEBUG_TAG, "ReviewJobLeadsActivity.onCreate()" );
+        Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate()");
 
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_to_buy_list );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_to_buy_list);
 
-        recyclerView = (RecyclerView) findViewById( R.id.recyclerView );
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         FloatingActionButton floatingButton = findViewById(R.id.floatingActionButton);
-        floatingButton.setOnClickListener( new View.OnClickListener() {
+        floatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new AddItemDialogFragment();
@@ -58,8 +58,8 @@ public class tobuyActivity
             }
         });
         // use a linear layout manager for the recycler view
-        layoutManager = new LinearLayoutManager(this );
-        recyclerView.setLayoutManager( layoutManager );
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         // get a Firebase DB instance reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -74,29 +74,29 @@ public class tobuyActivity
         // i.e., receive notifications about changes in the data in real time (hence the name, Realtime database).
         // This listener will be invoked asynchronously, as no need for an AsyncTask, as in the previous apps
         // to maintain job leads.
-        myRef.addListenerForSingleValueEvent( new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
-            public void onDataChange( DataSnapshot snapshot ) {
+            public void onDataChange(DataSnapshot snapshot) {
                 // Once we have a DataSnapshot object, knowing that this is a list,
                 // we need to iterate over the elements and place them on a List.
-                for( DataSnapshot postSnapshot: snapshot.getChildren() ) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item jobLead = postSnapshot.getValue(Item.class);
                     itemList.add(jobLead);
-                    Log.d( DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): added: " + jobLead );
+                    Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): added: " + jobLead);
                 }
-                Log.d( DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): setting recyclerAdapter" );
+                Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): setting recyclerAdapter");
 
                 // Now, create a itemRecyclerAdapterr to populate a ReceyclerView to display the job leads.
-                recyclerAdapter = new itemRecyclerAdapter( itemList );
-                recyclerView.setAdapter( recyclerAdapter );
+                recyclerAdapter = new itemRecyclerAdapter(itemList);
+                recyclerView.setAdapter(recyclerAdapter);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
-        } );
+        });
     }
 
     // this is our own callback for a DialogFragment which adds a new job lead.
@@ -111,31 +111,32 @@ public class tobuyActivity
         // list node to store the new job lead.
         // This listener will be invoked asynchronously, as no need for an AsyncTask, as in
         // the previous apps to maintain job leads.
-        myRef.push().setValue( jobLead )
-                .addOnSuccessListener( new OnSuccessListener<Void>() {
+        myRef.push().setValue(jobLead)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
 
                         // Update the recycler view to include the new job lead
-                        itemList.add( jobLead );
+                        itemList.add(jobLead);
                         recyclerAdapter.notifyItemInserted(itemList.size() - 1);
 
-                        Log.d( DEBUG_TAG, "Job lead saved: " + jobLead );
+                        Log.d(DEBUG_TAG, "Job lead saved: " + jobLead);
                         // Show a quick confirmation
                         Toast.makeText(getApplicationContext(), "Job lead created for " + jobLead.getName(),
                                 Toast.LENGTH_SHORT).show();
 
                     }
                 })
-                .addOnFailureListener( new OnFailureListener() {
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(Exception e) {
-                        Toast.makeText( getApplicationContext(), "Failed to create a Job lead for " + jobLead.getName(),
+                        Toast.makeText(getApplicationContext(), "Failed to create a Job lead for " + jobLead.getName(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    void showDialogFragment( DialogFragment newFragment ) {
-        newFragment.show( getSupportFragmentManager(), null);
+    void showDialogFragment(DialogFragment newFragment) {
+        newFragment.show(getSupportFragmentManager(), null);
     }
+}
