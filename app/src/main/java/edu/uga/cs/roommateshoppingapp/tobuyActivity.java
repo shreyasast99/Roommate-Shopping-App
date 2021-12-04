@@ -29,7 +29,8 @@ import java.util.List;
  * The current job leads are listed as a RecyclerView.
  */
 public class tobuyActivity
-        extends AppCompatActivity {
+            extends AppCompatActivity
+            implements AddItemDialogFragment.AddItemDialogListener{
 
     public static final String DEBUG_TAG = "ReviewJobLeadsActivity";
 
@@ -100,7 +101,7 @@ public class tobuyActivity
     }
 
     // this is our own callback for a DialogFragment which adds a new job lead.
-    public void onFinishNewJobLeadDialog(Item jobLead) {
+    public void onFinishNewItemDialog(Item jobLead) {
         // add the new job lead
         // Add a new element (JobLead) to the list of job leads in Firebase.
         FirebaseDatabase database = FirebaseDatabase.getInstance();

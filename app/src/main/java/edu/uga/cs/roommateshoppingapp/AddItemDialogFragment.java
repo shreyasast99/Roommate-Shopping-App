@@ -22,8 +22,8 @@ public class AddItemDialogFragment extends DialogFragment {
     // This interface will be used to obtain the new job lead from an AlertDialog.
     // A class implementing this interface will handle the new job lead, i.e. store it
     // in Firebase and add it to the RecyclerAdapter.
-    public interface AddJobLeadDialogListener {
-        void onFinishNewJobLeadDialog(Item jobLead);
+    public interface AddItemDialogListener {
+        void onFinishNewItemDialog(Item jobLead);
     }
 
     @Override
@@ -67,9 +67,9 @@ public class AddItemDialogFragment extends DialogFragment {
             Item jobLead = new Item( tempName, tempPrice );
 
             // get the Activity's listener to add the new job lead
-            AddJobLeadDialogListener listener = (AddJobLeadDialogListener) getActivity();
+            AddItemDialogListener listener = (AddItemDialogListener) getActivity();
             // add the new job lead
-            listener.onFinishNewJobLeadDialog( jobLead );
+            listener.onFinishNewItemDialog( jobLead );
             // close the dialog
             dismiss();
         }
