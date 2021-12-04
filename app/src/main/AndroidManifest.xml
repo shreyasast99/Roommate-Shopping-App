@@ -13,6 +13,9 @@
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
+            android:name=".tobuyActivity"
+            android:exported="true" />
+        <activity
             android:name=".ItemManagementActivity"
             android:exported="true" />
         <activity

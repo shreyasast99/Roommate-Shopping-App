@@ -38,7 +38,7 @@ public class AddItemDialogFragment extends DialogFragment {
         price = layout.findViewById( R.id.price );
 
         // create a new AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Set its view (inflated above).
         builder.setView(layout);
 
