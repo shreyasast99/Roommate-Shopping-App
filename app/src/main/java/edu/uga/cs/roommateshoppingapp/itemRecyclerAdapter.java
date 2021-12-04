@@ -26,11 +26,13 @@ public class itemRecyclerAdapter extends RecyclerView.Adapter<itemRecyclerAdapte
     class JobLeadHolder extends RecyclerView.ViewHolder {
 
         TextView price;
+        TextView name;
 
         public JobLeadHolder(View itemView ) {
             super(itemView);
-
+            name = (TextView) itemView.findViewById(R.id.name);
             price = (TextView) itemView.findViewById( R.id.price );
+
         }
     }
 
@@ -51,7 +53,7 @@ public class itemRecyclerAdapter extends RecyclerView.Adapter<itemRecyclerAdapte
         Item jobLead = jobLeadList.get( position );
 
         Log.d( DEBUG_TAG, "onBindViewHolder: " + jobLead );
-
+        holder.name.setText( jobLead.getName());
         holder.price.setText( Double.toString(jobLead.getPrice()));
     }
 
