@@ -8,19 +8,25 @@ public class Item {
 
     private String name;
     private double price;
+    private boolean purchased;
+    private String buyer;
 
     public Item()
     {
 
         this.name = null;
-        this.price = 0;
+        this.price = 0.00;
+        this.purchased = false;
+        this.buyer = null;
 
     }
 
-    public Item( String name,double price ) {
+    public Item( String name) {
 
-        this.name=name;
-        this.price=price;
+        this.name = name;
+        this.price=0.00;
+        this.purchased = false;
+        this.buyer = null;
 
     }
 
@@ -38,6 +44,22 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(String buyer) {
+        this.buyer = buyer;
+    }
+
+    public boolean getPurchased() {
+        return purchased;
+    }
+
+    public void setPurchased(boolean purchased) {
+        this.name = name;
     }
 
 
