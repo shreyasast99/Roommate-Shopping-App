@@ -113,7 +113,7 @@ public class UpdateItem extends AppCompatActivity {
                 //map.put("itemName", "a");
                 map.put("price", purchasePrice);
 
-
+//
                 myRef.child(keyOfItem).child("price").updateChildren(map);
                 */
                 final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
