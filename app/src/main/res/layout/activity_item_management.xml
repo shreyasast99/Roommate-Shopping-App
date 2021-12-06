@@ -31,4 +31,10 @@
         android:layout_gravity="center"
         android:layout_weight="0"
         android:text="Items Purchased" />
+
+    <Button
+        android:id="@+id/updateList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Items" />
 </LinearLayout>

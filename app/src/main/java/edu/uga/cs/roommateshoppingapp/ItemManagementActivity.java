@@ -34,6 +34,14 @@ public class ItemManagementActivity extends AppCompatActivity {
                 v.getContext().startActivity( intent );
             }
         });
+        Button updateAct = findViewById(R.id.updateList);
+        updateAct.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), UpdateItem.class);
+                v.getContext().startActivity( intent );
+            }
+        });
     }
 
 

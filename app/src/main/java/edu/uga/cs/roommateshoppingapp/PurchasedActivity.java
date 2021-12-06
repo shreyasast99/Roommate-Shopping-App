@@ -1,11 +1,9 @@
 package edu.uga.cs.roommateshoppingapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +28,9 @@ import java.util.List;
  * This is an activity controller class for listing the current job leads.
  * The current job leads are listed as a RecyclerView.
  */
-public class tobuyActivity
-            extends AppCompatActivity
-            implements AddItemDialogFragment.AddItemDialogListener{
+public class PurchasedActivity
+        extends AppCompatActivity
+        {
 
     public static final String DEBUG_TAG = "ReviewJobLeadsActivity";
 
@@ -48,18 +46,11 @@ public class tobuyActivity
         Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate()");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_to_buy_list);
+        setContentView(R.layout.activity_purchased);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        FloatingActionButton floatingButton = findViewById(R.id.floatingActionButton);
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment newFragment = new AddItemDialogFragment();
-                showDialogFragment(newFragment);
-            }
-        });
+
         // use a linear layout manager for the recycler view
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -85,7 +76,10 @@ public class tobuyActivity
                 // we need to iterate over the elements and place them on a List.
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item jobLead = postSnapshot.getValue(Item.class);
-                    itemList.add(jobLead);
+                    if(jobLead.getPurchased()==true){
+                        itemList.add(jobLead);
+                    }
+
                     Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): added: " + jobLead);
                 }
                 Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): setting recyclerAdapter");
@@ -102,44 +96,6 @@ public class tobuyActivity
         });
     }
 
-    // this is our own callback for a DialogFragment which adds a new job lead.
-    public void onFinishNewItemDialog(Item jobLead) {
-        // add the new job lead
-        // Add a new element (JobLead) to the list of job leads in Firebase.
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("jobleads");
 
-        // First, a call to push() appends a new node to the existing list (one is created
-        // if this is done for the first time).  Then, we set the value in the newly created
-        // list node to store the new job lead.
-        // This listener will be invoked asynchronously, as no need for an AsyncTask, as in
-        // the previous apps to maintain job leads.
-        myRef.push().setValue(jobLead)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
 
-                        // Update the recycler view to include the new job lead
-                        itemList.add(jobLead);
-                        recyclerAdapter.notifyItemInserted(itemList.size() - 1);
-
-                        Log.d(DEBUG_TAG, "Job lead saved: " + jobLead);
-                        // Show a quick confirmation
-                        Toast.makeText(getApplicationContext(), "Job lead created for " + jobLead.getName(),
-                                Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        Toast.makeText(getApplicationContext(), "Failed to create a Job lead for " + jobLead.getName(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    void showDialogFragment(DialogFragment newFragment) {
-        newFragment.show(getSupportFragmentManager(), null);
-    }
 }

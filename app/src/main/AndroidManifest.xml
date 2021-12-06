@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoommateShoppingApp">
         <activity
+            android:name=".UpdateItem"
+            android:exported="true" />
+        <activity
+            android:name=".PurchasedListRecyclerAdapter"
+            android:exported="true" />
+        <activity
+            android:name=".PurchasedActivity"
+            android:exported="true" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity

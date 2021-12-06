@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class UpdateItemDialogFragment extends DialogFragment {
+    /*
     private EditText price;
     private EditText buyer;
 
@@ -61,6 +62,7 @@ public class UpdateItemDialogFragment extends DialogFragment {
         public void onClick(DialogInterface dialog, int which) {
             Double tempPrice = Double.valueOf(price.getText().toString());
             String tempBuyer = buyer.getText().toString();
+
             Item jobLead = new Item( tempName, tempPrice, tempBuyer);
 
             // get the Activity's listener to add the new job lead
@@ -71,5 +73,7 @@ public class UpdateItemDialogFragment extends DialogFragment {
             dismiss();
         }
     }
+
+     */
 
 }
