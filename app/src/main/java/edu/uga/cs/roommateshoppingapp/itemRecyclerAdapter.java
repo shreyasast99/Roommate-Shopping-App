@@ -44,14 +44,6 @@ public class itemRecyclerAdapter
 
         public JobLeadHolder(View itemView ) {
             super(itemView);
-            Button btn = (Button) itemView.findViewById(R.id.btn);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DialogFragment newFragment = new UpdateItemDialogFragment();
-                    showDialogFragment(newFragment);
-                }
-            });
             name = (TextView) itemView.findViewById(R.id.name);
 
         }

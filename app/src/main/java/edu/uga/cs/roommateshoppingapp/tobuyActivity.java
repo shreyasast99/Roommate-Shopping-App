@@ -40,7 +40,10 @@ public class tobuyActivity
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
 
+    String temp;
+
     private List<Item> itemList;
+    private List<String> idList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class tobuyActivity
                 showDialogFragment(newFragment);
             }
         });
+
+
         // use a linear layout manager for the recycler view
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -69,6 +74,7 @@ public class tobuyActivity
         DatabaseReference myRef = database.getReference("jobleads");
 
         itemList = new ArrayList<Item>();
+        idList = new ArrayList<String>();
 
         // Set up a listener (event handler) to receive a value for the database reference, but only one time.
         // This type of listener is called by Firebase once by immediately executing its onDataChange method.
@@ -88,11 +94,16 @@ public class tobuyActivity
                     if(postSnapshot.child("purchased").getValue(Boolean.class)==false){
                         itemList.add(jobLead);
                     }
+                    temp = postSnapshot.getKey();
+                    idList.add(temp);
+                    itemList.add(jobLead);
                     Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): added: " + jobLead);
+
+
                 }
                 Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): setting recyclerAdapter");
 
-                // Now, create a itemRecyclerAdapterr to populate a ReceyclerView to display the job leads.
+                // Now, create a itemRecyclerAdapter to populate a RecyclerView to display the job leads.
                 recyclerAdapter = new itemRecyclerAdapter(itemList);
                 recyclerView.setAdapter(recyclerAdapter);
             }

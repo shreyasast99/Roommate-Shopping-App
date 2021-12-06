@@ -57,7 +57,7 @@ public class AddItemDialogFragment extends DialogFragment {
         return builder.create();
     }
 
-    private class ButtonClickListener implements DialogInterface.OnClickListener {
+    class ButtonClickListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             String tempName = name.getText().toString();
