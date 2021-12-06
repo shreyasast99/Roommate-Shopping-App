@@ -113,7 +113,7 @@ public class UpdateItem extends AppCompatActivity {
                 //map.put("itemName", "a");
                 map.put("price", purchasePrice);
 
-
+//
                 myRef.child(keyOfItem).child("price").updateChildren(map);
                 */
                 final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -127,6 +127,28 @@ public class UpdateItem extends AppCompatActivity {
                         tobuyActivity.class );
                 startActivity( intent );
 
+            }
+        });
+        //DELETE
+        Button deleteItem = findViewById(R.id.delete);
+        deleteItem.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView itemSel = (TextView) areaSpinner.getSelectedView();
+                String item_text = itemSel.getText().toString();//got what user selected
+                int index=0;
+                for(int i=0;i<areas.size();i++){
+                    if(areas.get(i).equals(item_text)){
+                        index=i;//got index of key
+                        break;
+                    }
+                }
+                String keyOfItem = keys.get(index);//got the key of the item
+                myRef.child(keyOfItem).removeValue();//removing the item
+                Intent intent = new
+                        Intent( view.getContext(),
+                        tobuyActivity.class );
+                startActivity( intent );
             }
         });
     }

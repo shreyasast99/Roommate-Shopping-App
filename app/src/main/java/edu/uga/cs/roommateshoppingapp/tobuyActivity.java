@@ -91,6 +91,9 @@ public class tobuyActivity
                 // we need to iterate over the elements and place them on a List.
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item jobLead = postSnapshot.getValue(Item.class);
+                    if(postSnapshot.child("purchased").getValue(Boolean.class)==false){
+                        itemList.add(jobLead);
+                    }
                     temp = postSnapshot.getKey();
                     idList.add(temp);
                     itemList.add(jobLead);
