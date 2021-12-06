@@ -42,6 +42,14 @@ public class ItemManagementActivity extends AppCompatActivity {
                 v.getContext().startActivity( intent );
             }
         });
+        Button purchAct = findViewById(R.id.itemsPurchased);
+        purchAct.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PurchasedActivity.class);
+                v.getContext().startActivity( intent );
+            }
+        });
     }
 
 

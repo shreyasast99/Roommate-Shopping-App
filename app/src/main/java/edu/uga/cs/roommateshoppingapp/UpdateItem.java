@@ -32,6 +32,7 @@ public class UpdateItem extends AppCompatActivity {
     Spinner purchSpinner;
     List<String> areas;
     List<String> keys;
+    List<Item> items;
     DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,14 @@ public class UpdateItem extends AppCompatActivity {
                 // initialize the array
                 areas = new ArrayList<String>();
                 keys = new ArrayList<String>();
-
+                items = new ArrayList<Item>();
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                     String areaName = areaSnapshot.child("name").getValue(String.class);
                     String key = areaSnapshot.getKey();
+                    Item jobLead = areaSnapshot.getValue(Item.class);
                     areas.add(areaName);
                     keys.add(key);
+                    items.add(jobLead);
                     //Log.e("wtf",areaName);
                 }
                 Log.i("the name: ",areas.get(2));
@@ -96,6 +99,13 @@ public class UpdateItem extends AppCompatActivity {
                 Log.e("this is key: ",keyOfItem);
                 TextView purchSel = (TextView) purchSpinner.getSelectedView();
                 String purch_text = purchSel.getText().toString();
+                boolean isPurchased=false;
+                if(purch_text.equals("yes")) {
+                    isPurchased = true;
+                    items.get(index).setPurchased(true);
+                }else{
+                    isPurchased=false;
+                }
                 price   = (EditText)findViewById(R.id.Price);
                 double purchasePrice =Double.parseDouble(price.getText().toString());
                 /*
@@ -111,6 +121,7 @@ public class UpdateItem extends AppCompatActivity {
                 String uid = user.getEmail();
                 myRef.child(keyOfItem).child("price").setValue(purchasePrice);
                 myRef.child(keyOfItem).child("buyer").setValue(uid);
+                myRef.child(keyOfItem).child("purchased").setValue(isPurchased);
                 Intent intent = new
                         Intent( view.getContext(),
                         tobuyActivity.class );

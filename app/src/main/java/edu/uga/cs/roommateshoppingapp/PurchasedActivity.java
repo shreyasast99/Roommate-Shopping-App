@@ -76,7 +76,9 @@ public class PurchasedActivity
                 // we need to iterate over the elements and place them on a List.
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item jobLead = postSnapshot.getValue(Item.class);
-                    if(jobLead.getPurchased()==true){
+                    Log.i("checkme:name ",jobLead.getName());
+                    Log.i("checkme: ",Boolean.toString(jobLead.getPurchased()));
+                    if(postSnapshot.child("purchased").getValue(Boolean.class)){
                         itemList.add(jobLead);
                     }
 
