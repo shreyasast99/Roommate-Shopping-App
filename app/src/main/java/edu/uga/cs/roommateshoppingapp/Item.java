@@ -59,8 +59,10 @@ public class Item {
     }
 
     public void setPurchased(boolean purchased) {
-        this.name = name;
+        this.purchased = purchased;
     }
+
+
 
 
 

@@ -12,10 +12,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -25,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passworEditText;
     private Button   registerButton;
+    private List<user> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +56,29 @@ public class RegisterActivity extends AppCompatActivity {
             final String password = passworEditText.getText().toString();
 
             final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+            user currentUser = new user(email, 0.0F);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("users");
+            myRef.push().setValue(currentUser)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            Log.d(DEBUG_TAG, "I DID ITTTTTTTT");
+                            // Show a quick confirmation
+                            Toast.makeText(getApplicationContext(), "User add for " + currentUser.getName(),
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(getApplicationContext(), "Failed to create a user for " + currentUser.getName(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
             // This is how we can create a new user using an email/password combination.
             // Note that we also add an onComplete listener, which will be invoked once
@@ -78,6 +112,8 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+
         }
     }
 }
