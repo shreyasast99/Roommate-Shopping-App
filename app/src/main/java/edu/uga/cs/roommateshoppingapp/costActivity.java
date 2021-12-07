@@ -35,6 +35,7 @@ public class costActivity extends AppCompatActivity {
     List<String> keysUser;
     List<String> keysItem;
     List<Double> totalPrices;
+    List<String> isPurchasedKeys;
     //List<Item> items;
     DatabaseReference myUserRef;
     DatabaseReference myItemRef;
@@ -89,6 +90,7 @@ public class costActivity extends AppCompatActivity {
                 buyers = new ArrayList<String>();
                 keysItem = new ArrayList<String>();
                 itemPrice = new ArrayList<Double>();
+                isPurchasedKeys = new ArrayList<String>();
                 //items = new ArrayList<Item>();
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                     if(areaSnapshot.child("buyer").exists()) {
@@ -98,6 +100,10 @@ public class costActivity extends AppCompatActivity {
                         buyers.add(buyer);
                         itemPrice.add(price);
                         keysItem.add(key);
+                    }
+                    String key = areaSnapshot.getKey();
+                    if(areaSnapshot.child("purchased").getValue(Boolean.class)==true){
+                        isPurchasedKeys.add(key);
                     }
                     //Item jobLead = areaSnapshot.getValue(Item.class);
 
@@ -175,17 +181,22 @@ public class costActivity extends AppCompatActivity {
                 Log.e("this is key: ",keyOfItem);
 
                 TextView roommate = findViewById(R.id.perRoommate);
-                roommate.setText(Double.toString(totalPrices.get(index)));
+                roommate.setText("Roommate's Expense: "+Double.toString(totalPrices.get(index)));
 
                 TextView collectiveCost = findViewById(R.id.totalCost);
                 int collectiveTotal=0;
                 for(int i=0;i<totalPrices.size();i++){
                     collectiveTotal+=totalPrices.get(i);
                 }
-                collectiveCost.setText(Double.toString(collectiveTotal));
+                collectiveCost.setText("Total Cost: "+Double.toString(collectiveTotal));
 
                 TextView average = findViewById(R.id.averageCost);
-                average.setText(Double.toString(collectiveTotal/totalPrices.size()));
+                average.setText("Average Cost: "+Double.toString(collectiveTotal/totalPrices.size()));
+                //also delete all the items in the recently purchased list
+                for(int i=0;i<isPurchasedKeys.size();i++){
+                    myItemRef.child(isPurchasedKeys.get(i)).removeValue();
+                    Log.e("is it going in here", isPurchasedKeys.get(i));
+                }
                 /*
                 Intent intent = new
                         Intent( view.getContext(),

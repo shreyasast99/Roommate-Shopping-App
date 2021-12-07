@@ -67,7 +67,7 @@ public class UpdateItem extends AppCompatActivity {
                     items.add(jobLead);
                     //Log.e("wtf",areaName);
                 }
-                Log.i("the name: ",areas.get(2));
+
                 areaSpinner = (Spinner) findViewById(R.id.itemSpinner);
                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(UpdateItem.this, android.R.layout.simple_spinner_item, areas);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
