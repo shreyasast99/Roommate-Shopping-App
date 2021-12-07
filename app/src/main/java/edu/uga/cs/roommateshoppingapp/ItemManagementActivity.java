@@ -1,5 +1,7 @@
 package edu.uga.cs.roommateshoppingapp;
 
+import static edu.uga.cs.roommateshoppingapp.tobuyActivity.DEBUG_TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,6 +59,28 @@ public class ItemManagementActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), costActivity.class);
                 v.getContext().startActivity( intent );
+            }
+        });
+
+        Button logout = findViewById(R.id.logout);
+        logout.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /**
+                FirebaseAuth.getInstance().signOut();
+                Log.d(DEBUG_TAG, "Sign out success????? ");
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                v.getContext().startActivity( intent ); */
+
+                AuthUI.getInstance()
+                        .signOut(v.getContext())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(Task<Void> task) {
+                                // user is now signed out
+                                startActivity(new Intent(v.getContext(), MainActivity.class));
+                                finish();
+                            }
+                        });
             }
         });
     }
