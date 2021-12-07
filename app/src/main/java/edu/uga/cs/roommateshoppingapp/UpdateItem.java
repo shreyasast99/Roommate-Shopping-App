@@ -29,6 +29,7 @@ import java.util.List;
  * This class will update the item in case a mistake has been made
  */
 public class UpdateItem extends AppCompatActivity {
+    String uid;
     double purchasePrice;
     String keyOfItem;
     Spinner areaSpinner;
@@ -168,7 +169,7 @@ public class UpdateItem extends AppCompatActivity {
                 */
                 final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                String uid = user.getEmail();
+                uid = user.getEmail();
                 myRef.child(keyOfItem).child("price").setValue(purchasePrice);
                 myRef.child(keyOfItem).child("buyer").setValue(uid);
                 myRef.child(keyOfItem).child("purchased").setValue(isPurchased);
@@ -230,6 +231,7 @@ public class UpdateItem extends AppCompatActivity {
                     String key = areaSnapshot.getKey();
                     if(key.equals(keyOfItem)){
                         areaSnapshot.getValue(Item.class).setPrice(purchasePrice);
+                        areaSnapshot.getValue(Item.class).setBuyer(uid);
                     }
 
                 }

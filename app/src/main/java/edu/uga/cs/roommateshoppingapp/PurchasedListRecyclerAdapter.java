@@ -24,7 +24,7 @@ import java.util.List;
 public class PurchasedListRecyclerAdapter
         extends RecyclerView.Adapter<PurchasedListRecyclerAdapter.JobLeadHolder> {
 
-    public static final String DEBUG_TAG = "itemRecyclerAdapterr";
+    public static final String DEBUG_TAG = "PURCHASEDRecyclerAdapterr";
 
     private List<Item> jobLeadList;
 
@@ -47,7 +47,7 @@ public class PurchasedListRecyclerAdapter
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
             price = (TextView) itemView.findViewById( R.id.price );
-            whoBoughtIt= (TextView) itemView.findViewById( R.id.whoBoughtIt );
+            whoBoughtIt= (TextView) itemView.findViewById( R.id.buyer );
         }
     }
 
