@@ -25,8 +25,8 @@ import java.util.List;
 
 
 /**
- * This is an activity controller class for listing the current job leads.
- * The current job leads are listed as a RecyclerView.
+ * This is an activity controller class for listing the current purchased items.
+ * The current items are listed as a RecyclerView.
  */
 public class PurchasedActivity
         extends AppCompatActivity
@@ -40,6 +40,10 @@ public class PurchasedActivity
 
     public static List<Item> itemList;
 
+    /**
+     * This is for when the activity first starts; it creates the layout
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,6 +74,10 @@ public class PurchasedActivity
         // to maintain job leads.
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
+            /**
+             * This is for when we add the purchased item to the purchased item list.
+             * @param snapshot
+             */
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 // Once we have a DataSnapshot object, knowing that this is a list,
@@ -88,7 +96,7 @@ public class PurchasedActivity
                 Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): setting recyclerAdapter");
 
                 // Now, create a itemRecyclerAdapterr to populate a ReceyclerView to display the job leads.
-                recyclerAdapter = new itemRecyclerAdapter(itemList);
+                recyclerAdapter = new PurchasedListRecyclerAdapter(itemList);
                 recyclerView.setAdapter(recyclerAdapter);
             }
 

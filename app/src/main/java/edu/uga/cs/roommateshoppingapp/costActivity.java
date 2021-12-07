@@ -24,6 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is for displaying the costs.
+ * */
 public class costActivity extends AppCompatActivity {
     Spinner areaSpinner;
     private List<Item> jobLeadsList;
@@ -39,6 +42,10 @@ public class costActivity extends AppCompatActivity {
     //List<Item> items;
     DatabaseReference myUserRef;
     DatabaseReference myItemRef;
+
+    /**
+     * onCreate to trigger the app to get the data from the database
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +58,10 @@ public class costActivity extends AppCompatActivity {
         jobLeadsList = new ArrayList<Item>();
         Log.d("umm ","notice me");
         myUserRef.addValueEventListener(new ValueEventListener() {
+            /**
+             * This method is for keeping track of when data is changed. Also adds the spinner
+             * @param dataSnapshot
+             * */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -82,6 +93,10 @@ public class costActivity extends AppCompatActivity {
         });
         //ITEMS
         myItemRef.addValueEventListener(new ValueEventListener() {
+            /**
+             * This method is for keeping track if the item is purchased or not
+             * @param dataSnapshot
+             * */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -120,6 +135,10 @@ public class costActivity extends AppCompatActivity {
         });
         //gonna get the total prices again i guess
         myUserRef.addValueEventListener(new ValueEventListener() {
+            /**
+             * This method is for keeping track of the total cost
+             * @param dataSnapshot
+             * */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -141,6 +160,10 @@ public class costActivity extends AppCompatActivity {
         });
         Button settleCosts = findViewById(R.id.settleTheCosts);
         settleCosts.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This method is detailing what happens when a roommate is chosen from the spinner
+             * @param view
+             * */
             @Override
             public void onClick(View view) {
 

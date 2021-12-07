@@ -14,6 +14,9 @@ import androidx.fragment.app.DialogFragment;
 
 // A DialogFragment class to handle job lead additions from the job lead review activity
 // It uses a DialogFragment to allow the input of a new job lead.
+/**
+ * This class is to create the add item dialog so users can add items.
+ * */
 public class AddItemDialogFragment extends DialogFragment {
 
     private EditText name;
@@ -25,6 +28,9 @@ public class AddItemDialogFragment extends DialogFragment {
         void onFinishNewItemDialog(Item jobLead);
     }
 
+    /**
+     * This is to create the actual dialog and display an edit text
+     * */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Create the AlertDialog view
@@ -57,6 +63,9 @@ public class AddItemDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    /**
+     * This class adds the actual item based on the name of the item that was entered
+     * */
     class ButtonClickListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {

@@ -19,19 +19,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is an adapter class for the RecyclerView to show all job leads.
+ * This is an adapter class for the RecyclerView to show all purchcased items.
  */
-public class PurchasedListRecyclerAdapter extends RecyclerView.Adapter<PurchasedListRecyclerAdapter.JobLeadHolder> {
+public class PurchasedListRecyclerAdapter
+        extends RecyclerView.Adapter<PurchasedListRecyclerAdapter.JobLeadHolder> {
 
     public static final String DEBUG_TAG = "itemRecyclerAdapterr";
 
     private List<Item> jobLeadList;
 
+    /**
+     * Sets the jobleadlist
+     * @param jobLeadList
+     */
     public PurchasedListRecyclerAdapter(List<Item> jobLeadList ) {
         this.jobLeadList = jobLeadList;
     }
 
-    // The adapter must have a ViewHolder class to "hold" one item to show.
+    /**
+     * The adapter must have a ViewHolder class to "hold" one item to show.
+     */
     class JobLeadHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView price;
@@ -44,6 +51,12 @@ public class PurchasedListRecyclerAdapter extends RecyclerView.Adapter<Purchased
         }
     }
 
+    /**
+     * This is to create the card
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public JobLeadHolder onCreateViewHolder( ViewGroup parent, int viewType ) {
         // We need to make sure that all CardViews have the same, full width, allowed by the parent view.
@@ -54,8 +67,12 @@ public class PurchasedListRecyclerAdapter extends RecyclerView.Adapter<Purchased
         return new JobLeadHolder( view );
     }
 
-    // This method fills in the values of a holder to show a JobLead.
-    // The position parameter indicates the position on the list of jobs list.
+    /**
+     * This method fills in the values of a holder to show an item
+     * The position parameter indicates the position on the list of items
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder( JobLeadHolder holder, int position ) {
 
@@ -69,6 +86,10 @@ public class PurchasedListRecyclerAdapter extends RecyclerView.Adapter<Purchased
         holder.whoBoughtIt.setText( jobLead.getBuyer());
     }
 
+    /**
+     * Returns the number of items in the list
+     * @return
+     */
     @Override
     public int getItemCount() {
         return jobLeadList.size();

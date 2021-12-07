@@ -24,12 +24,19 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * This class is for the login/register page
+ * */
 public class MainActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "MainActivity";
 
     private static final int RC_SIGN_IN = 123;
 
+    /**
+     * This method is for when the activity first starts. It sets up the layout.
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,8 +54,15 @@ public class MainActivity extends AppCompatActivity {
         registerButton.setOnClickListener( new RegisterButtonClickListener() );
     }
 
-    // A button listener class to start a Firebase sign-in process
+
+    /**
+     * A button listener class to start a Firebase sign-in process
+     */
     private class SignInButtonClickListener implements View.OnClickListener {
+        /**
+         * When clicked, it lets the user sign in
+         * @param v
+         */
         @Override
         public void onClick( View v ) {
             // This is an example of how to use the AuthUI activity for signing in to Firebase.
@@ -90,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
     // This method is called (above) once the Firebase sign-in activity returns (completes).
     // The current (logged-in) Firebase user can be obtained.
     // Then, there is a transition to the JobLeadManagementActivity.
+    /**
+     * Shows the result of the sign in attempt
+     * */
     private void onSignInResult( FirebaseAuthUIAuthenticationResult result ) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
@@ -115,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This class is for when the user tries to register
+     */
     private class RegisterButtonClickListener implements View.OnClickListener {
+        /**
+         * This is when the user clicks the register button
+         * @param view
+         */
         @Override
         public void onClick(View view) {
             // start the user registration activity

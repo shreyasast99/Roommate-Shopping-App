@@ -27,8 +27,8 @@ import java.util.List;
 
 
 /**
- * This is an activity controller class for listing the current job leads.
- * The current job leads are listed as a RecyclerView.
+ * This is an activity controller class for listing the current to buy items.
+ * The current to buy items are listed as a RecyclerView.
  */
 public class tobuyActivity
             extends AppCompatActivity
@@ -45,6 +45,10 @@ public class tobuyActivity
     public static List<Item> itemList;
     private List<String> idList;
 
+    /**
+     * This is when the activity is first created, it sets up the layout
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,6 +61,10 @@ public class tobuyActivity
 
         FloatingActionButton floatingButton = findViewById(R.id.floatingActionButton);
         floatingButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * When the user clicks the plus button to add a new item
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new AddItemDialogFragment();
@@ -84,7 +92,11 @@ public class tobuyActivity
         // This listener will be invoked asynchronously, as no need for an AsyncTask, as in the previous apps
         // to maintain job leads.
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
+            /**
+             * This is when the item is placed in the list of to buy items
+             * and creates a recyclerview adapter
+             * @param snapshot
+             */
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 // Once we have a DataSnapshot object, knowing that this is a list,
@@ -108,6 +120,10 @@ public class tobuyActivity
                 recyclerView.setAdapter(recyclerAdapter);
             }
 
+            /**
+             * Adding an item has been cancelled
+             * @param databaseError
+             */
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getMessage());
@@ -115,6 +131,10 @@ public class tobuyActivity
         });
     }
 
+    /**
+     * Add a new item onto the database
+     * @param jobLead
+     */
     // this is our own callback for a DialogFragment which adds a new job lead.
     public void onFinishNewItemDialog(Item jobLead) {
         // add the new job lead
@@ -129,6 +149,10 @@ public class tobuyActivity
         // the previous apps to maintain job leads.
         myRef.push().setValue(jobLead)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    /**
+                     * When it is successful and the database is updated
+                     * @param aVoid
+                     */
                     @Override
                     public void onSuccess(Void aVoid) {
 
@@ -144,6 +168,10 @@ public class tobuyActivity
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
+                    /**
+                     * When it has failed and the new item has not been added to the database
+                     * @param e
+                     */
                     @Override
                     public void onFailure(Exception e) {
                         Toast.makeText(getApplicationContext(), "Failed to create a Job lead for " + jobLead.getName(),
@@ -152,6 +180,10 @@ public class tobuyActivity
                 });
     }
 
+    /**
+     * Show dialog fragment
+     * @param newFragment
+     */
     void showDialogFragment(DialogFragment newFragment) {
         newFragment.show(getSupportFragmentManager(), null);
     }

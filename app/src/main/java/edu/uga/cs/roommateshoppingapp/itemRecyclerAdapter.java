@@ -55,7 +55,7 @@ public class itemRecyclerAdapter
         // This is a bit tricky, and we must provide the parent reference (the second param of inflate)
         // and false as the third parameter (don't attach to root).
         // Consequently, the parent view's (the RecyclerView) width will be used (match_parent).
-        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.item, parent, false );
+        View view = LayoutInflater.from( parent.getContext()).inflate( R.layout.item_name, parent, false );
         return new JobLeadHolder( view );
     }
 
