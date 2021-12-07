@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class will update the item in case a mistake has been made
+ */
 public class UpdateItem extends AppCompatActivity {
     Spinner areaSpinner;
     private List<Item> jobLeadsList;
@@ -34,6 +37,11 @@ public class UpdateItem extends AppCompatActivity {
     List<String> keys;
     List<Item> items;
     DatabaseReference myRef;
+
+    /**
+     * This is when the activity is first created, it sets up the layout and opens connection with database
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +58,10 @@ public class UpdateItem extends AppCompatActivity {
         jobLeadsList = new ArrayList<Item>();
         Log.d("umm ","notice me");
         myRef.addValueEventListener(new ValueEventListener() {
+            /**
+             * This is creating the spinner of items available for change
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Is better to use a List, because you don't know the size
@@ -74,6 +86,10 @@ public class UpdateItem extends AppCompatActivity {
                 areaSpinner.setAdapter(areasAdapter);
             }
 
+            /**
+             * When it has been cancelled
+             * @param databaseError
+             */
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -83,6 +99,10 @@ public class UpdateItem extends AppCompatActivity {
 
         Button updateAct = findViewById(R.id.submitUpdate);
         updateAct.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This is loading the data after the item has been selected
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 TextView itemSel = (TextView) areaSpinner.getSelectedView();
@@ -132,6 +152,10 @@ public class UpdateItem extends AppCompatActivity {
         //DELETE
         Button deleteItem = findViewById(R.id.delete);
         deleteItem.setOnClickListener( new View.OnClickListener() {
+            /**
+             * Deleting an item
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 TextView itemSel = (TextView) areaSpinner.getSelectedView();

@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/***
+ * This class is for when the user needs to register an account for the first time
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "RegisterActivity";
@@ -37,6 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Button   registerButton;
     private List<user> userList;
 
+    /**
+     * This is for when the activity is first creates, it lays out the edit text boxes
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +56,14 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener( new RegisterButtonClickListener() );
     }
 
+    /**
+     * This class is for the register button
+     */
     private class RegisterButtonClickListener implements View.OnClickListener {
+        /**
+         * This method saves the account info when the button is clicked
+         * @param view
+         */
         @Override
         public void onClick(View view) {
             final String email = emailEditText.getText().toString();
@@ -62,6 +76,10 @@ public class RegisterActivity extends AppCompatActivity {
             DatabaseReference myRef = database.getReference("users");
             myRef.push().setValue(currentUser)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        /**
+                         * When it successful registers a user
+                         * @param aVoid
+                         */
                         @Override
                         public void onSuccess(Void aVoid) {
 
@@ -73,6 +91,10 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
+                        /**
+                         * When it is a failed attempt on registering a user
+                         * @param e
+                         */
                         @Override
                         public void onFailure(Exception e) {
                             Toast.makeText(getApplicationContext(), "Failed to create a user for " + currentUser.getName(),
@@ -88,6 +110,10 @@ public class RegisterActivity extends AppCompatActivity {
             // no separate sign in is needed.
             firebaseAuth.createUserWithEmailAndPassword( email, password )
                     .addOnCompleteListener( RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        /**
+                         * Once the process of registering a user is complete
+                         * @param task
+                         */
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {

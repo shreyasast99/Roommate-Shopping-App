@@ -23,14 +23,26 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * This class is the home page after the user logins
+ * */
 public class ItemManagementActivity extends AppCompatActivity {
 
+    /**
+     * This is for when the activity starts, it creates the layout and depending on the button
+     * clicked, it takes the user to a new activity.
+     * @param savedInstanceState
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_management);
         Button itemList = findViewById(R.id.itemList);
         itemList.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This leads the user to the to buy list activity
+             * @param v
+             * */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), tobuyActivity.class);
@@ -39,6 +51,10 @@ public class ItemManagementActivity extends AppCompatActivity {
         });
         Button updateAct = findViewById(R.id.updateList);
         updateAct.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This leads the user to the update item activity
+             * @param v
+             * */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UpdateItem.class);
@@ -47,6 +63,10 @@ public class ItemManagementActivity extends AppCompatActivity {
         });
         Button purchAct = findViewById(R.id.itemsPurchased);
         purchAct.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This leads the user to the purchased list activity
+             * @param v
+             * */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PurchasedActivity.class);
@@ -55,6 +75,10 @@ public class ItemManagementActivity extends AppCompatActivity {
         });
         Button settleAct = findViewById(R.id.settle);
         settleAct.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This leads the user to the cost activity
+             * @param v
+             * */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), costActivity.class);
@@ -64,6 +88,10 @@ public class ItemManagementActivity extends AppCompatActivity {
 
         Button logout = findViewById(R.id.logout);
         logout.setOnClickListener( new View.OnClickListener() {
+            /**
+             * This leads the user to log out
+             * @param v
+             * */
             @Override
             public void onClick(View v) {
                 /**

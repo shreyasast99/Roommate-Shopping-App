@@ -12,40 +12,74 @@ public class user {
     private String userName;
     private float spent;
 
+    /**
+     * Default constructor
+     */
     public user(){
         this.id = -1;
         this.userName = "";
         this.spent = 0.00F;
     }
 
+    /**
+     * Constructor when the name and amount spent has been provided
+     * @param userName
+     * @param spent
+     */
     public user( String userName, float spent) {
         this.userName = userName;
         this.spent = spent;
     }
 
+    /**
+     * Get ID
+     * @return
+     */
     public long getId()
     {
         return id;
     }
 
+    /**
+     * Set ID
+     * @param id
+     */
     public void setId(long id)
     {
         this.id = id;
     }
+
+    /**
+     * Get name
+     * @return
+     */
     public String getName()
     {
         return userName;
     }
 
+    /**
+     * Set name
+     * @param userName
+     */
     public void setName(String userName)
     {
         this.userName = userName;
     }
+
+    /**
+     * Get Spent
+     * @return
+     */
     public float getSpent()
     {
         return spent;
     }
 
+    /**
+     * Set Spent
+     * @param spent
+     */
     public void setSpent(float spent)
     {
         this.spent = spent;
