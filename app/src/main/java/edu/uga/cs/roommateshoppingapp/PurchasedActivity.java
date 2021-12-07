@@ -38,7 +38,7 @@ public class PurchasedActivity
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter recyclerAdapter;
 
-    private List<Item> itemList;
+    public static List<Item> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class PurchasedActivity
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item jobLead = postSnapshot.getValue(Item.class);
                     Log.i("checkme:name ",jobLead.getName());
+                    Log.i("checkme:price ",Double.toString(jobLead.getPrice()));
                     Log.i("checkme: ",Boolean.toString(jobLead.getPurchased()));
                     if(postSnapshot.child("purchased").getValue(Boolean.class)){
                         itemList.add(jobLead);

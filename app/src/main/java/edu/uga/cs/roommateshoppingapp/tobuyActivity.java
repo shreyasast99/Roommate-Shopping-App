@@ -42,7 +42,7 @@ public class tobuyActivity
 
     String temp;
 
-    private List<Item> itemList;
+    public static List<Item> itemList;
     private List<String> idList;
 
     @Override

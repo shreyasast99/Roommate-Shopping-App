@@ -5,8 +5,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,9 +58,12 @@ public class PurchasedListRecyclerAdapter extends RecyclerView.Adapter<Purchased
     // The position parameter indicates the position on the list of jobs list.
     @Override
     public void onBindViewHolder( JobLeadHolder holder, int position ) {
+
+
         Item jobLead = jobLeadList.get( position );
 
         Log.d( DEBUG_TAG, "onBindViewHolder: " + jobLead );
+        Log.d("adapter price: ",Double.toString(jobLead.getPrice()));
         holder.name.setText( jobLead.getName());
         holder.price.setText( Double.toString(jobLead.getPrice()));
         holder.whoBoughtIt.setText( jobLead.getBuyer());

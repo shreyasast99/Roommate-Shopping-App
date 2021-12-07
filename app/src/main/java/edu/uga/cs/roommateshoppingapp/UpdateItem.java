@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UpdateItem extends AppCompatActivity {
+    double purchasePrice;
+    String keyOfItem;
     Spinner areaSpinner;
     private List<Item> jobLeadsList;
     String[] arraySpinner;
@@ -72,6 +75,31 @@ public class UpdateItem extends AppCompatActivity {
                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(UpdateItem.this, android.R.layout.simple_spinner_item, areas);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 areaSpinner.setAdapter(areasAdapter);
+
+                //  adding NEW STUFF
+                /*
+                TextView itemSel = (TextView) areaSpinner.getSelectedView();
+                String item_text = itemSel.getText().toString();//got what user selected
+                int index=0;
+                for(int i=0;i<areas.size();i++){
+                    if(areas.get(i).equals(item_text)){
+                        index=i;//got index of key
+                        break;
+                    }
+                }
+                String keyOfItem = keys.get(index);//got the key of the item
+                price   = (EditText)findViewById(R.id.Price);
+                double purchasePrice =Double.parseDouble(price.getText().toString());
+
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String key = areaSnapshot.getKey();
+                    if(key.equals(keyOfItem)){
+                        areaSnapshot.getValue(Item.class).setPrice(purchasePrice);
+                    }
+
+                }
+
+                 */
             }
 
             @Override
@@ -94,7 +122,7 @@ public class UpdateItem extends AppCompatActivity {
                         break;
                     }
                 }
-                String keyOfItem = keys.get(index);//got the key of the item
+                keyOfItem = keys.get(index);//got the key of the item
 
                 Log.e("this is key: ",keyOfItem);
                 TextView purchSel = (TextView) purchSpinner.getSelectedView();
@@ -107,7 +135,9 @@ public class UpdateItem extends AppCompatActivity {
                     isPurchased=false;
                 }
                 price   = (EditText)findViewById(R.id.Price);
-                double purchasePrice =Double.parseDouble(price.getText().toString());
+                purchasePrice =Double.parseDouble(price.getText().toString());
+
+                //PurchasedActivity.itemList.get(index).setPrice(purchasePrice);//pls work babe
                 /*
                 HashMap<String, Object> map = new HashMap<>();
                 //map.put("itemName", "a");
@@ -149,6 +179,43 @@ public class UpdateItem extends AppCompatActivity {
                         Intent( view.getContext(),
                         tobuyActivity.class );
                 startActivity( intent );
+            }
+        });
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Is better to use a List, because you don't know the size
+                // of the iterator returned by dataSnapshot.getChildren() to
+                // initialize the array
+                areas = new ArrayList<String>();
+                keys = new ArrayList<String>();
+                items = new ArrayList<Item>();
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String areaName = areaSnapshot.child("name").getValue(String.class);
+                    String key = areaSnapshot.getKey();
+                    Item jobLead = areaSnapshot.getValue(Item.class);
+                    areas.add(areaName);
+                    keys.add(key);
+                    items.add(jobLead);
+                    //Log.e("wtf",areaName);
+                }
+                //  adding NEW STUFF
+
+
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String key = areaSnapshot.getKey();
+                    if(key.equals(keyOfItem)){
+                        areaSnapshot.getValue(Item.class).setPrice(purchasePrice);
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }

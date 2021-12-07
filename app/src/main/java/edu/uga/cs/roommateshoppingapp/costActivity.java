@@ -30,10 +30,10 @@ public class costActivity extends AppCompatActivity {
     String[] arraySpinner;
     Spinner purchSpinner;
     List<String> emails;
-    List<String> buyers;
-    List<Double> itemPrice;
+    public List<String> buyers;
+    public static List<Double> itemPrice;
     List<String> keysUser;
-    List<String> keysItem;
+    public List<String> keysItem;
     List<Double> totalPrices;
     List<String> isPurchasedKeys;
     //List<Item> items;
@@ -208,4 +208,5 @@ public class costActivity extends AppCompatActivity {
             }
         });
     }
+
 }
