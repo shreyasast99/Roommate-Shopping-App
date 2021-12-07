@@ -50,6 +50,14 @@ public class ItemManagementActivity extends AppCompatActivity {
                 v.getContext().startActivity( intent );
             }
         });
+        Button settleAct = findViewById(R.id.settle);
+        settleAct.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), costActivity.class);
+                v.getContext().startActivity( intent );
+            }
+        });
     }
 
 

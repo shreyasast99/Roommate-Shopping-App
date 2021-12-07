@@ -96,7 +96,7 @@ public class tobuyActivity
                     }
                     temp = postSnapshot.getKey();
                     idList.add(temp);
-                    itemList.add(jobLead);
+                    //itemList.add(jobLead);
                     Log.d(DEBUG_TAG, "ReviewJobLeadsActivity.onCreate(): added: " + jobLead);
 
 

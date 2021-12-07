@@ -34,7 +34,15 @@
 
     <Button
         android:id="@+id/updateList"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Update Items" />
+
+    <Button
+        android:id="@+id/settle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Settle Costs" />
 </LinearLayout>
