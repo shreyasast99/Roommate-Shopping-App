@@ -149,7 +149,7 @@ public class costActivity extends AppCompatActivity {
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                     double totalCost = areaSnapshot.child("spent").getValue(Double.class);
                     Log.e("THE TOTAL COST",Double.toString(totalCost));
-                    totalPrices.add(totalCost);
+                    //totalPrices.add(totalCost);
 
                 }
             }
@@ -170,24 +170,27 @@ public class costActivity extends AppCompatActivity {
 
                 //for loop that adds the costs of each roommate
                 //double totalPrice=0;
-                for(int i=0;i<emails.size();i++){
-                    double totalPrice=0;
-                    for(int j=0;j<buyers.size();j++){
-                        //Log.e("buyer: ",buyers.get(j));
-                        //Log.e("email: ",emails.get(i));
+                if(totalPrices.size()==0) {
+                    for (int i = 0; i < emails.size(); i++) {
+                        double totalPrice = 0;
+                        for (int j = 0; j < buyers.size(); j++) {
+                            //Log.e("buyer: ",buyers.get(j));
+                            //Log.e("email: ",emails.get(i));
 
-                        if(buyers.get(j).equals(emails.get(i))){
-                            totalPrice = totalPrice+itemPrice.get(j);
-                            Log.e("buyer: ",buyers.get(j));
-                            Log.e("email: ",emails.get(i));
-                            Log.e("totalPrice: ",Double.toString(totalPrice));
+                            if (buyers.get(j).equals(emails.get(i))) {
+                                totalPrice = totalPrice + itemPrice.get(j);
+                                Log.e("buyer: ", buyers.get(j));
+                                Log.e("email: ", emails.get(i));
+                                Log.e("totalPrice: ", Double.toString(totalPrice));
+                            }
+
+
+                            //Log.e("buyer: ",buyers.get(j));
                         }
-
-
-                        //Log.e("buyer: ",buyers.get(j));
+                        Log.e("totalPrice after: ", Double.toString(totalPrice));
+                        myUserRef.child(keysUser.get(i)).child("spent").setValue(totalPrice);
+                        totalPrices.add(totalPrice);
                     }
-                    Log.e("totalPrice after: ",Double.toString(totalPrice));
-                    myUserRef.child(keysUser.get(i)).child("spent").setValue(totalPrice);
                 }
 
                 TextView userSel = (TextView) areaSpinner.getSelectedView();
