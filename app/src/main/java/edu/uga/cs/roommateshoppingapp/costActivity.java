@@ -210,7 +210,7 @@ public class costActivity extends AppCompatActivity {
                 roommate.setText("Roommate's Expense: "+Double.toString(totalPrices.get(index)));
 
                 TextView collectiveCost = findViewById(R.id.totalCost);
-                int collectiveTotal=0;
+                double collectiveTotal=0;
                 for(int i=0;i<totalPrices.size();i++){
                     collectiveTotal+=totalPrices.get(i);
                 }

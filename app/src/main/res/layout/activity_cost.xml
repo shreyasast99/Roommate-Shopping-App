@@ -17,13 +17,13 @@
         android:id="@+id/totalCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Total" />
 
     <TextView
         android:id="@+id/averageCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Average Cost per Roommate" />
 
     <Spinner
         android:id="@+id/spentByRoommate"
@@ -34,7 +34,7 @@
         android:id="@+id/perRoommate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Individual Cost" />
 
     <Button
         android:id="@+id/settleTheCosts"

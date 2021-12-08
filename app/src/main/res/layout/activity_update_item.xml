@@ -18,14 +18,20 @@
         android:id="@+id/itemSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Item Name" />
     <EditText
         android:id="@+id/Price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Price" />
+        android:hint="Price" />
 
     <Spinner
         android:id="@+id/purchased"

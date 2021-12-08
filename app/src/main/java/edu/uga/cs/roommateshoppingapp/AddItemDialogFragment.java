@@ -47,7 +47,7 @@ public class AddItemDialogFragment extends DialogFragment {
         builder.setView(layout);
 
         // Set the title of the AlertDialog
-        builder.setTitle( "New Job Lead" );
+        builder.setTitle( "New Item" );
         // Provide the negative button listener
         builder.setNegativeButton( android.R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
